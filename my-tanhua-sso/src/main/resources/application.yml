@@ -1,0 +1,53 @@
+spring:
+  application:
+    name: my-tanhua-sso
+
+  servlet:
+    multipart:
+      max-request-size: 30MB
+      max-file-size: 30MB
+
+
+
+
+
+  redis:
+    redisson:
+      file: classpath:redisson.yaml
+    #database: 0
+    #host: localhost
+    #port: 6379
+
+
+logging:
+  level:
+    top.yusora.tanhua: debug
+    root: info
+
+
+server:
+  port: 18080
+
+dubbo:
+  application:
+    name: my-tanhua-sso
+    id: my-tanhua-sso
+    logger: slf4j
+  registry:
+    address: zookeeper://192.168.1.158:12181
+    timeout: 60000
+  consumer:
+    check: false
+    timeout: 60000
+
+
+
+rocketmq:
+  name-server: 192.168.1.144:30916;192.168.1.144:30915
+  producer:
+    group: tanhua
+
+tanhua:
+  rsa:
+    dir: /Users/heyu/Documents/rsa
+

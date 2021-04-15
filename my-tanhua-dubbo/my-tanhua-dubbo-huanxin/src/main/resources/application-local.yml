@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: my-tanhua-dubbo-huanxin
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.1.149:13306/tanhua_test?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+    username: root
+    password: jy5867215
+
+  redis:
+    redisson:
+      file: classpath:redisson.yaml
+
+
+
+dubbo:
+  application:
+    name: dubbo-provider-huanxin
+    id: dubbo-provider-huanxin
+    logger: slf4j
+  registry:
+    address: zookeeper://192.168.1.158:12181
+    timeout: 60000
+
+  protocol:
+    name: dubbo
+    port: 20881
+
+
+  consumer:
+    check: false
+    timeout: 60000
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    map-underscore-to-camel-case: true
+  type-aliases-package: top.yusora.tanhua.dubbo.server.pojo
+  type-enums-package: top.yusora.tanhua.dubbo.server.enums
+
+  global-config:
+    db-config:
+      table-prefix: tb_
+      id-type: auto
+
+
+
+logging:
+  level:
+    top.yusora.tanhua: debug
+    org:
+      mongodb:
+        driver:
+          protocol:
+            command: debug
+    root: info
+
+

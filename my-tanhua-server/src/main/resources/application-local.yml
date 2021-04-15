@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: my-tanhua-server
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  redis:
+    redisson:
+      file: classpath:redisson.yaml
+
+server:
+  port: 18081
+
+
+
+logging:
+  level:
+    top.yusora.tanhua: debug
+    root: info
+
+dubbo:
+  application:
+    name: my-tanhua-server
+    id: my-tanhua-server
+    logger: slf4j
+  registry:
+    address: zookeeper://192.168.1.158:12181
+    timeout: 60000
+
+  consumer:
+    check: false
+    timeout: 60000
+
+rocketmq:
+  name-server: 192.168.1.144:30916;192.168.1.144:30915
+  producer:
+    group: tanhua
+
+tanhua:
+  cache:
+    enable: true
+  sso:
+    url: http://127.0.0.1
+    default:
+      user: 2
+  rsa:
+    dir: /Users/heyu/Documents/rsa
+
+    #默认推荐列表
+  default:
+    recommend:
+      users: 2,3,8,10,18,20,24,29,27,32,36,37,56,64,75,88
+
+
+# ===================================================================
+# 分布式文件系统FDFS配置
+# ===================================================================
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  #缩略图生成参数
+  thumb-image.width: 150
+  thumb-image.height: 150
+  #TrackerList参数,支持多个
+  tracker-list: 192.168.1.146:22122
+  #访问路径
+  web-server-url: http://192.168.1.146:8888/

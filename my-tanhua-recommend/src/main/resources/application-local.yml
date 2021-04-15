@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: my-tanhua-dubbo-recommend
+  data:
+    mongodb:
+      #host: 192.168.1.149
+      #port: 32767
+      #username: tanhua
+      #password: jy5867215
+      #authentication-database: admin
+      #database: tanhua
+      uri: mongodb://192.168.1.146:27017,192.168.1.149:27017,192.168.1.147:27017/tanhua?slaveOk=true&replicaSet=rs0&write=1&readPreference=secondaryPreferred&connectTimeoutMS=300000
+  redis:
+    redisson:
+      file: classpath:redisson.yaml
+
+
+
+
+logging:
+  level:
+    top.yusora.tanhua: debug
+    root: info
+
+
+rocketmq:
+  name-server: 192.168.1.144:30916;192.168.1.144:30915
+  producer:
+    group: tanhua
+
+server:
+  port: 18082

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>my-tanhua</artifactId>
+        <groupId>top.yusora</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+
+    <artifactId>my-tanhua-dubbo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>my-tanhua-dubbo</name>
+    <description>parent module for dubbo modules</description>
+    <packaging>pom</packaging>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <modules>
+        <module>my-tanhua-dubbo-interface</module>
+        <module>my-tanhua-dubbo-service</module>
+        <module>my-tanhua-dubbo-interface</module>
+        <module>my-tanhua-dubbo-service</module>
+        <module>my-tanhua-dubbo-huanxin</module>
+    </modules>
+
+
+</project>

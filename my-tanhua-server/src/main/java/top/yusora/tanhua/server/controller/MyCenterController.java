@@ -10,6 +10,7 @@ import top.yusora.tanhua.server.vo.CountsVo;
 import top.yusora.tanhua.server.vo.PageResult;
 import top.yusora.tanhua.server.vo.SettingsVo;
 import top.yusora.tanhua.server.vo.UserInfoVo;
+import top.yusora.tanhua.utils.Cache;
 
 import java.util.Map;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class MyCenterController {
      * @param userId 用户id，如果为空，表示查询当前登录人的信息
      * @return 用户信息
      */
+    @Cache
     @GetMapping
     public UserInfoVo queryUserInfoByUserId(@RequestParam(value = "userID", required = false) Long userId) {
 
@@ -92,6 +94,7 @@ public class MyCenterController {
      * @param nickname 昵称
      * @return 相应用户列表
      */
+    @Cache(time = "10")
     @GetMapping("friends/{type}")
     public PageResult queryLikeList(@PathVariable("type") String type,
                                                     @RequestParam(value = "page", defaultValue = "1") Integer page,

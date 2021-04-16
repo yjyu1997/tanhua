@@ -13,6 +13,7 @@ import top.yusora.tanhua.server.service.TestSoulService;
 import top.yusora.tanhua.dubbo.server.pojo.po.mongodb.Answer;
 import top.yusora.tanhua.server.vo.QuestionnaireVo;
 import top.yusora.tanhua.server.vo.ReportVo;
+import top.yusora.tanhua.utils.Cache;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +30,7 @@ public class TestSoulController {
     private TestSoulService testSoulService;
 
     @GetMapping
+    @Cache(time = "10")
     public List<QuestionnaireVo> getQuestionnaires(){
         try{
             return Optional.ofNullable(this.testSoulService.getQuestionnaires())
@@ -59,6 +61,7 @@ public class TestSoulController {
 
 
     @GetMapping("/report/{id}")
+    @Cache(time = "10")
     public ReportVo getReport(@PathVariable("id") String reportId){
         try{
             return Optional.ofNullable(this.testSoulService.getReport(reportId))

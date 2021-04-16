@@ -53,13 +53,16 @@ public class TestSoulServiceImpl implements TestSoulService {
 
         List<QuestionnaireVo> questionnaireVos = new ArrayList<>();
 
-        //3.获取report
-        TestReport report = this.testSoulApi.getReport(userId);
+
 
         for (Questionnaire questionnaire : questionnaires) {
             QuestionnaireVo questionnaireVo = BeanUtil.toBeanIgnoreError(questionnaire, QuestionnaireVo.class);
             //设置id
             questionnaireVo.setId(questionnaire.getId().toHexString());
+
+            //3.获取report
+            TestReport report = this.testSoulApi.getReport(userId,questionnaire.getId());
+
             //设置reportId
             if(ObjectUtil.isNotEmpty(report)){
                 questionnaireVo.setReportId(report.getId().toHexString());
@@ -105,8 +108,14 @@ public class TestSoulServiceImpl implements TestSoulService {
 
         Long userId = UserThreadLocal.get();
 
+        //远程调用获取测试报告
+        TestReport testReport = this.testSoulApi.getReportById(reportId);
+        if(ObjectUtil.isNull(testReport)){
+            return null;
+        }
+
         //远程调用获取测试结果
-        TestResult testResult = this.testSoulApi.getResultByReportId(reportId);
+        TestResult testResult = this.testSoulApi.getResultById(testReport.getResultId());
         if(ObjectUtil.isNull(testResult)){
             return null;
         }
@@ -118,7 +127,7 @@ public class TestSoulServiceImpl implements TestSoulService {
         reportVo.setCover(testResult.getCover());
 
         //获取相似的用户id
-        List<Object> userIds = this.testSoulApi.getSimilarUserId(testResult.getId(),userId);
+        List<Object> userIds = this.testSoulApi.getSimilarUserId(testResult.getId(),testReport.getQuestionnaireId(),userId);
 
         if(CollUtil.isEmpty(userIds)){
             return reportVo;

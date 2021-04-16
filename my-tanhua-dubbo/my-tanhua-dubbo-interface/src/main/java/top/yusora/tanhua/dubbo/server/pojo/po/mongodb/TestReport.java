@@ -27,6 +27,8 @@ public class TestReport implements Serializable {
     @Indexed(unique = true)
     private Long userId;
 
+    private ObjectId questionnaireId;
+
     private ObjectId resultId;
 
     private Long created;

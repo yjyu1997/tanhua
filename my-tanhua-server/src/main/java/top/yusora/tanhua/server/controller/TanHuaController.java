@@ -7,6 +7,7 @@ import top.yusora.tanhua.exception.CastException;
 import top.yusora.tanhua.server.service.TanhuaService;
 import top.yusora.tanhua.server.vo.NearUserVo;
 import top.yusora.tanhua.server.vo.TodayBest;
+import top.yusora.tanhua.utils.Cache;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public class TanHuaController {
      * @param userId 用户id
      * @return 个人信息（可复用今日佳人）
      */
+    @Cache
     @GetMapping("{id}/personalInfo")
     public TodayBest queryUserInfo(@PathVariable("id") Long userId) {
 
@@ -84,6 +86,7 @@ public class TanHuaController {
      *
      * @return 探花卡片列表
      */
+    @Cache
     @GetMapping("cards")
     public List<TodayBest> queryCardsList() {
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import top.yusora.tanhua.dubbo.server.api.HuanXinApi;
+import top.yusora.tanhua.dubbo.server.api.TestSoulApi;
 import top.yusora.tanhua.dubbo.server.api.UserApi;
 import top.yusora.tanhua.dubbo.server.pojo.po.mysql.User;
 import top.yusora.tanhua.sso.service.RSAService;
@@ -38,6 +39,9 @@ public class UserServiceImpl implements UserService {
 
     @DubboReference(version = "1.0.0")
     private HuanXinApi huanXinApi;
+
+    @DubboReference(version = "1.0.0")
+    private TestSoulApi testSoulApi;
 
     @Autowired
     private RSAService rsaService;
@@ -85,6 +89,12 @@ public class UserServiceImpl implements UserService {
             if (!result) {
                 //注册环信失败，记录日志
                 log.error("注册环信用户失败~ userId = " + user.getId());
+            }
+
+            //开放默认初级问卷
+            Boolean initTest = this.testSoulApi.initTestLock(user.getId());
+            if(!initTest) {
+                log.error("初始化问卷失败~ userId = " + user.getId());
             }
         }
 

@@ -17,6 +17,8 @@ import top.yusora.tanhua.vo.PicUploadResult;
 import top.yusora.tanhua.utils.EmptyUtil;
 import top.yusora.tanhua.utils.ExceptionsUtil;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -62,6 +64,7 @@ public class UserInfoServiceImpl implements UserInfoService {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserId(userId);
         userInfo.setSex(StrUtil.equalsIgnoreCase(gender, "male") ? SexEnum.MAN : SexEnum.WOMAN);
+        userInfo.setAge(this.calAge(birthday));
         userInfo.setNickName(nickname);
         userInfo.setBirthday(birthday);
         userInfo.setCity(city);
@@ -111,5 +114,14 @@ public class UserInfoServiceImpl implements UserInfoService {
             log.error("保存用户头像异常，原因：{}", ExceptionsUtil.getStackTraceAsString(e));
             return false;
         }
+    }
+
+
+    private Integer calAge(String birthday){
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(birthday, pattern);
+        int year = date.getYear();
+        int yearOfNow = LocalDate.now().getYear();
+        return yearOfNow-year;
     }
 }

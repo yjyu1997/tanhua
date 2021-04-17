@@ -1,0 +1,7 @@
+FROM www.yusora.top/library/jdk1.8:latest
+
+COPY *.jar /app.jar
+
+EXPOSE 20880
+
+ENTRYPOINT ["java","-jar","/app.jar"]

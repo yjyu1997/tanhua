@@ -22,8 +22,6 @@
     <modules>
         <module>my-tanhua-dubbo-interface</module>
         <module>my-tanhua-dubbo-service</module>
-        <module>my-tanhua-dubbo-interface</module>
-        <module>my-tanhua-dubbo-service</module>
         <module>my-tanhua-dubbo-huanxin</module>
     </modules>
 

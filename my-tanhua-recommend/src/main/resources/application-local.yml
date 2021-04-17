@@ -12,7 +12,7 @@ spring:
       uri: mongodb://192.168.1.146:27017,192.168.1.149:27017,192.168.1.147:27017/tanhua?slaveOk=true&replicaSet=rs0&write=1&readPreference=secondaryPreferred&connectTimeoutMS=300000
   redis:
     redisson:
-      file: classpath:redisson.yaml
+      file: classpath:redisson-dev.yaml
 
 
 
